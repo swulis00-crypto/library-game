@@ -2307,3 +2307,131 @@ body {
   .tile-name { margin-top: 0.25rem; font-size: 0.88rem; }
   .game-tile { padding: 0.3rem 0.3rem 0.35rem; }
 }
+
+/* ==========================================================================
+   V2.3: 태블릿 전용 레이아웃
+   - 가로: 왼손 엄지 = 방향 패드, 오른손 엄지 = 액션 버튼, 가운데 게임판, 오른쪽 위 문제 카드
+   - 세로: 게임판 높이를 줄여 패드가 스크롤 없이 바로 아래에
+   ========================================================================== */
+
+/* 터치 기기라면(보조 입력 포함) 터치 컨트롤을 보여준다 */
+@media (any-pointer: coarse) {
+  .touch-controls-bar { display: flex; }
+}
+
+/* 태블릿 가로 (터치가 기본 입력인 901~1400px) : 콘솔 배치 */
+@media (min-width: 901px) and (max-width: 1400px) and (pointer: coarse) {
+  .in-game .app-container { padding: 0.6rem 0.9rem 0.9rem; }
+  .game-screen {
+    max-width: none;
+    grid-template-columns: 196px minmax(0, 1fr) 272px;
+    grid-template-areas:
+      "hud   hud  hud"
+      "left  view clue"
+      "left  view toast"
+      "left  view action"
+      "howto howto howto";
+    grid-template-rows: auto auto auto 1fr auto;
+    gap: 0.6rem 0.9rem;
+  }
+  .game-screen[data-controls="pointer"] { grid-template-columns: 0 minmax(0, 1fr) 272px; }
+  .game-hud { padding: 0.5rem 1rem; }
+  .game-viewport-card { grid-area: view; align-self: start; justify-self: center; width: 100%; }
+  #gameCanvas {
+    max-height: calc(100vh - 176px);
+    max-height: calc(100dvh - 176px);
+  }
+  .game-clue-banner { padding: 0.85rem 1rem; }
+  .clue-title { font-size: 1.2rem; }
+  .clue-instruction { font-size: 1rem; }
+  .game-toast { font-size: 0.95rem; }
+
+  /* 방향 패드: 왼쪽 세로 중앙 */
+  .touch-controls-bar {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    position: static;
+  }
+  .touch-dpad { grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); gap: 6px; }
+  .touch-dpad.lr-only { grid-template-columns: repeat(2, 68px); grid-template-rows: 68px; gap: 10px; }
+  .touch-dbtn { font-size: 1.5rem; background: rgba(30, 41, 59, 0.9); border-color: rgba(255,255,255,0.18); }
+
+  /* 액션 버튼: 오른쪽 아래(오른손 엄지) */
+  .touch-action-group {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 110;
+  }
+  .touch-action-btn { width: 96px; height: 96px; font-size: 1.25rem; box-shadow: 0 6px 22px rgba(236, 72, 153, 0.55); }
+  .game-howto { font-size: 0.82rem; }
+}
+
+/* 태블릿 세로 (641~900px): 게임판 아래 패드가 한 화면에 */
+@media (min-width: 641px) and (max-width: 900px) {
+  .in-game .app-container { padding: 0.6rem 0.9rem 1.2rem; }
+  .game-screen { gap: 0.6rem; }
+  .game-hud { padding: 0.5rem 0.9rem; }
+  .game-clue-banner { padding: 0.7rem 1rem; }
+  .clue-instruction { font-size: 1rem; }
+  .game-viewport-card { min-height: 0; }
+  #gameCanvas {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 470px);
+    max-height: calc(100dvh - 470px);
+  }
+  .touch-controls-bar { margin-top: 0; padding: 0.6rem 1.75rem; justify-content: space-between; }
+  .touch-dpad { grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); gap: 6px; }
+  .touch-dbtn { font-size: 1.5rem; }
+  .touch-action-btn { width: 92px; height: 92px; font-size: 1.2rem; }
+  .game-howto { font-size: 0.85rem; }
+  /* 세로 태블릿에서는 문제를 패드 옆에도 함께 보여줌 */
+  .bar-clue { display: block; flex: 1; min-width: 0; margin: 0 1.25rem; font-size: 0.95rem; line-height: 1.4; color: #e2e8f0; max-height: 170px; overflow-y: auto; }
+  .bar-clue-tag { font-size: 0.7rem; color: #a5b4fc; font-weight: 700; }
+  .bar-clue-title { font-family: var(--font-kid); font-size: 1.1rem; color: #fde68a; }
+  .bar-clue-text { font-weight: 600; }
+  .game-screen:not([data-controls="pointer"]) .game-clue-banner { display: none; }
+  /* 시작 화면/게임 선택 터치 목표 확대 */
+  .game-card { padding: 1.4rem; }
+  .game-play-btn { padding: 0.7rem 1.4rem; font-size: 1rem; }
+  .nav-btn { padding: 0.55rem 0.9rem; font-size: 0.9rem; }
+}
+
+/* 태블릿 공통: 버튼·탭 터치 목표 */
+@media (any-pointer: coarse) and (min-width: 641px) {
+  .diff-btn { padding: 0.6rem 1.3rem; font-size: 0.95rem; }
+  .guide-tab-btn { padding: 0.8rem 1.4rem; }
+  .overlay-next-btn { min-height: 56px; }
+  .hud-btn { padding: 0.55rem 0.95rem; }
+}
+
+/* V2.3 보정: 태블릿 가로에서는 캐릭터 버튼 4열(큰 터치 목표, 가로 넘침 방지) */
+@media (pointer: coarse) and (min-width: 901px) and (max-width: 1400px) {
+  .hero-screen.v3 .avatar-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.45rem; }
+  .hero-screen.v3 .avatar-btn { font-size: 1.6rem; min-width: 0; }
+}
+/* 좁은 태블릿 세로(≤760px): 상단 메뉴가 넘치지 않도록 */
+@media (min-width: 641px) and (max-width: 760px) {
+  .app-header { padding: 0 0.6rem; gap: 0.3rem; }
+  .brand-text h1 { font-size: 1rem; }
+  .nav-btn { padding: 0.4rem 0.5rem; font-size: 0.78rem; }
+  .user-badge-btn .user-name { display: none; }
+  .user-badge-btn { padding: 0.3rem 0.5rem; }
+  .sound-toggle-btn, .bgm-toggle-btn { width: 34px; height: 34px; font-size: 1rem; }
+}
+
+/* 태블릿 세로: 캐릭터 8열 유지, 버튼 크기 상한 */
+@media (min-width: 641px) and (max-width: 900px) {
+  .hero-screen.v3 .avatar-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0.4rem; }
+  .hero-screen.v3 .avatar-btn { font-size: 1.5rem; max-height: 72px; }
+}

@@ -1,7 +1,6 @@
 /**
  * 화면 컴포넌트: 시작 화면
  *  - 글자보다 게임 화면이 먼저 보이도록: 6개 게임이 돌아가며 보이는 아케이드 쇼케이스
- *  - 아래 6개 게임 타일을 누르면 바로 그 게임 시작
  *  - 내 캐릭터(아바타) 고르기 (저장하지 않음), 개인정보 입력 없음
  */
 
@@ -62,15 +61,6 @@ export function renderStartScreen(container) {
         </div>
       </div>
 
-      <!-- 6개 게임 타일 -->
-      <div class="hero-strip" aria-label="게임 바로 가기">
-        ${games.map(g => `
-          <button class="game-tile" data-game-id="${g.id}" style="--card-color:${g.themeColor}">
-            <span class="tile-screen"><canvas class="tile-canvas" data-game-id="${g.id}" width="800" height="${g.id === 'snake' ? 512 : 520}"></canvas></span>
-            <span class="tile-name"><span>${g.icon}</span> ${g.title}</span>
-          </button>
-        `).join('')}
-      </div>
     </div>
   `;
 
@@ -94,7 +84,6 @@ export function renderStartScreen(container) {
 
   requestAnimationFrame(() => {
     paintShowcase(0);
-    container.querySelectorAll('.tile-canvas').forEach(c => paintGamePreview(c, c.getAttribute('data-game-id')));
   });
 
   showcaseTimer = setInterval(() => {
@@ -119,13 +108,6 @@ export function renderStartScreen(container) {
     store.setScreen('game-select');
   });
 
-  container.querySelectorAll('.game-tile').forEach(tile => {
-    tile.addEventListener('click', () => {
-      soundFx.play('go');
-      store.setScreen('game', tile.getAttribute('data-game-id'));
-    });
-  });
-
   container.querySelectorAll('.avatar-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       soundFx.play('coin');
@@ -138,7 +120,6 @@ export function renderStartScreen(container) {
       if (bubble) bubble.innerHTML = `${a} 멋진 선택! <strong>게임 시작</strong>을 눌러 출발하자!`;
       // 캐릭터가 바뀌면 미리보기도 새 캐릭터로
       paintShowcase(shown);
-      container.querySelectorAll('.tile-canvas').forEach(c => paintGamePreview(c, c.getAttribute('data-game-id')));
     });
   });
 
