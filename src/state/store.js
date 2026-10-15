@@ -58,7 +58,7 @@ export const GAME_METADATA = {
     subtitle: '미션 번호대 벽돌을 공으로 깨뜨려요!',
     icon: '🧱',
     themeColor: '#f59e0b',
-    howTo: '마우스·터치·좌우 키로 막대를 움직여요. 미션 번호대 벽돌은 한 번에, 다른 벽돌은 두 번 맞아야 깨져요.',
+    howTo: '마우스·터치·좌우 키로 막대를 움직여요. 미션 번호대 벽돌만 다 깨면 성공! 다른 벽돌을 치면 "이 번호는 ○○" 하고 알려줘요.',
     skills: '분류번호 백 자리(000~900) 구별',
     controls: 'horizontal'
   },

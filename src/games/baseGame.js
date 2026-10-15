@@ -85,10 +85,22 @@ export class BaseGame {
     this._loop(this._lastTs);
   }
 
-  /** 미리 보기용 정적 화면(카운트다운 중) */
+  /**
+   * 미리 보기용 정적 화면 (카운트다운 중, 게임 선택 카드 썸네일)
+   * 첫 문제의 게임판을 실제 그리기 코드로 한 장 그린다. 타이머·입력은 시작하지 않는다.
+   */
   preview() {
     this.canvas.width = this.canvasW;
     this.canvas.height = this.canvasH;
+    try {
+      if (this.questions.length > 0) {
+        this.currentQIndex = 0;
+        this.onQuestionLoad(this.questions[0], 0);
+        if (typeof this.previewDecorate === 'function') this.previewDecorate();
+        this.render();
+        return;
+      }
+    } catch (e) { /* 아래 기본 화면으로 */ }
     try {
       this.renderPreview();
     } catch (e) { /* ignore */ }

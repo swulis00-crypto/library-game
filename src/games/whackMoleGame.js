@@ -59,6 +59,19 @@ export class WhackMoleGame extends BaseGame {
     this._drawBoard();
   }
 
+  /** 썸네일/카운트다운용: 두더지 세 마리가 올라와 있는 장면 */
+  previewDecorate() {
+    if (!this.holes.length) this._layoutHoles();
+    const q = this.currentQuestion;
+    if (!q) return;
+    const picks = [1, 3, 8].filter(i => this.holes[i]);
+    picks.forEach((hi, k) => {
+      const data = q.moles[k % q.moles.length];
+      this.holes[hi].mole = { code: data.code, isTarget: data.isTarget, desc: data.desc, height: 72, maxHeight: 72, state: 'stay', timer: 0 };
+    });
+    this.hammer = { x: 640, y: 420, whack: 0 };
+  }
+
   /* ---------------- 문제 세팅 ---------------- */
 
   onQuestionLoad(q, index) {

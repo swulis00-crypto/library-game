@@ -13,13 +13,13 @@ import { ALL_DIVISIONS, getMainClass } from '../data/questionGenerator.js';
 export class BrickBreakerGame extends BaseGame {
   constructor(canvas, config) {
     super(canvas, config);
-    this.timeLimit = this.difficulty === 'challenge' ? 100 : 90;
+    this.timeLimit = this.difficulty === 'challenge' ? 100 : 110;
     this.startLives = 3;
 
-    this.paddle = { x: 345, y: 482, w: this.difficulty === 'challenge' ? 100 : 120, h: 16, speed: 9, dir: 0 };
+    this.paddle = { x: 345, y: 482, w: this.difficulty === 'challenge' ? 110 : 150, h: 16, speed: 9, dir: 0 };
     this.ball = { x: 400, y: 460, r: 8, vx: 4, vy: -5 };
     this.ballHold = 0;
-    this.baseSpeed = this.difficulty === 'challenge' ? 5.4 : 4.6;
+    this.baseSpeed = this.difficulty === 'challenge' ? 5.0 : 3.9;
     this.bricks = [];
     this.wrongCodesNoted = new Set();
 
@@ -61,9 +61,11 @@ export class BrickBreakerGame extends BaseGame {
     this._resetBall();
     this.ballHold = 60;
 
-    const rows = 4;
-    const cols = 8;
-    const brickW = 86;
+    // 쉬움: 3줄 x 7개(21개) 중 미션 벽돌 6개 / 도전: 4줄 x 8개(32개) 중 9개
+    const isEasy = this.difficulty !== 'challenge';
+    const rows = isEasy ? 3 : 4;
+    const cols = isEasy ? 7 : 8;
+    const brickW = isEasy ? 96 : 86;
     const brickH = 30;
     const pad = 8;
     const startX = (this.canvasW - (cols * (brickW + pad) - pad)) / 2;
@@ -73,13 +75,25 @@ export class BrickBreakerGame extends BaseGame {
     const others = ALL_DIVISIONS.filter(d => !targetCats.includes(d.classCode));
     const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
 
-    const targetCount = this.difficulty === 'challenge' ? 12 : 10;
+    const targetCount = isEasy ? 6 : 9;
     const picks = [];
     const tShuffled = shuffle(targets);
     for (let i = 0; i < targetCount; i++) picks.push({ ...tShuffled[i % tShuffled.length], isTarget: true });
     const oShuffled = shuffle(others);
     for (let i = 0; picks.length < rows * cols; i++) picks.push({ ...oShuffled[i % oShuffled.length], isTarget: false });
     const layout = shuffle(picks);
+    // 쉬움: 맨 아랫줄에 미션 벽돌이 최소 2개 오도록(공이 먼저 닿는 곳)
+    if (isEasy) {
+      const bottomStart = (rows - 1) * cols;
+      let bottomTargets = layout.slice(bottomStart).filter(d => d.isTarget).length;
+      for (let i = 0; i < bottomStart && bottomTargets < 2; i++) {
+        if (!layout[i].isTarget) continue;
+        const j = layout.slice(bottomStart).findIndex(d => !d.isTarget);
+        if (j === -1) break;
+        [layout[i], layout[bottomStart + j]] = [layout[bottomStart + j], layout[i]];
+        bottomTargets++;
+      }
+    }
 
     this.bricks = layout.map((d, i) => {
       const r = Math.floor(i / cols);
@@ -92,13 +106,13 @@ export class BrickBreakerGame extends BaseGame {
         name: d.name,
         className: d.className,
         isTarget: d.isTarget,
-        hp: d.isTarget ? 1 : 2,
+        hp: d.isTarget ? 1 : (isEasy ? 1 : 2),
         alive: true
       };
     });
 
     this.setClue({
-      tag: `미션 ${index + 1} / ${this.questions.length} · 미션 벽돌 ${targetCount}개`,
+      tag: `미션 ${index + 1} / ${this.questions.length} · 미션 벽돌 ${targetCount}개만 깨면 성공!`,
       title: q.targetLabel,
       clue: q.missionText
     });
