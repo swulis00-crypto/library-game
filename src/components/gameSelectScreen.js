@@ -8,41 +8,10 @@
 import { store, GAME_METADATA } from '../state/store.js';
 import { soundFx } from '../audio/soundFx.js';
 
-import { MazeGame } from '../games/mazeGame.js';
-import { ShelfSortGame } from '../games/shelfSortGame.js';
-import { SpaceDefenseGame } from '../games/spaceDefenseGame.js';
-import { BrickBreakerGame } from '../games/brickBreakerGame.js';
-import { SnakeGame } from '../games/snakeGame.js';
-import { WhackMoleGame } from '../games/whackMoleGame.js';
-
-const PREVIEW_CLASSES = {
-  maze: MazeGame,
-  shelfSort: ShelfSortGame,
-  spaceDefense: SpaceDefenseGame,
-  brickBreaker: BrickBreakerGame,
-  snake: SnakeGame,
-  whackMole: WhackMoleGame
-};
+import { paintGamePreview } from './gamePreview.js';
 
 function starRow(n) {
   return [1, 2, 3].map(i => `<span class="star ${i <= n ? 'on' : ''}">★</span>`).join('');
-}
-
-/** 카드 안 캔버스에 게임 화면 한 장 그리기 */
-function paintPreview(canvas, gameId, difficulty) {
-  const GameClass = PREVIEW_CLASSES[gameId];
-  if (!GameClass) return;
-  try {
-    const game = new GameClass(canvas, {
-      questions: store.getRound(gameId, difficulty),
-      difficulty,
-      avatar: store.session.avatar
-    });
-    game.preview();
-    game.destroy();
-  } catch (e) {
-    console.warn('preview failed', gameId, e);
-  }
 }
 
 export function renderGameSelectScreen(container) {
@@ -106,7 +75,7 @@ export function renderGameSelectScreen(container) {
   // 미리보기 그리기 (화면이 먼저 뜨도록 한 프레임 뒤에)
   requestAnimationFrame(() => {
     container.querySelectorAll('.game-card-preview').forEach(canvas => {
-      paintPreview(canvas, canvas.getAttribute('data-game-id'), diff);
+      paintGamePreview(canvas, canvas.getAttribute('data-game-id'), diff);
     });
   });
 
