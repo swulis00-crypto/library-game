@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>책길 탐험대 OG 이미지</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f8fafc;
+    background: #0f172a;
+    background-image:
+      radial-gradient(circle at 12% 18%, #312e81 0%, transparent 42%),
+      radial-gradient(circle at 88% 85%, #4c1d95 0%, transparent 40%),
+      radial-gradient(circle at 70% 10%, rgba(236,72,153,0.35) 0%, transparent 30%),
+      linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    position: relative;
+  }
+  /* 배경 책꽂이 패턴 */
+  .shelf {
+    position: absolute; left: 0; right: 0; height: 54px;
+    display: flex; gap: 10px; padding: 0 20px; opacity: 0.22;
+  }
+  .shelf i { display: block; width: 14px; border-radius: 3px 3px 0 0; align-self: flex-end; }
+  .shelf.top { top: -6px; transform: rotate(180deg); }
+  .shelf.bottom { bottom: 0; }
+  .stars { position: absolute; inset: 0; }
+  .stars i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #fde68a; opacity: 0.7; }
+
+  .wrap { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 380px; padding: 64px 70px 64px 80px; align-items: center; }
+  .pill { margin-top: 10px;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(99,102,241,0.22); border: 2px solid rgba(165,180,252,0.6);
+    color: #c7d2fe; border-radius: 999px; padding: 8px 20px; font-size: 24px; font-weight: 700;
+    margin-bottom: 26px;
+  }
+  h1 { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 84px; line-height: 1.06; letter-spacing: -1px; white-space: nowrap; }
+  h1 .grad { background: linear-gradient(135deg, #fde68a 0%, #f472b6 55%, #60a5fa 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { margin-top: 20px; font-size: 30px; font-weight: 700; color: #e2e8f0; line-height: 1.35; }
+  .sub b { color: #fde68a; }
+  .url { margin-top: 22px; font-size: 23px; color: #94a3b8; font-weight: 500; letter-spacing: 0.2px; }
+
+  .right { position: relative; height: 100%; }
+  .games { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 380px; }
+  .card {
+    background: rgba(30,41,59,0.78); border: 2px solid rgba(255,255,255,0.14); border-radius: 26px;
+    padding: 18px 14px 14px; text-align: center; box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+  }
+  .card .ic { font-size: 54px; line-height: 1; display: block; margin-bottom: 8px; }
+  .card .nm { font-family: 'Jua', sans-serif; font-size: 26px; color: #fff; }
+  .card.c1 { border-top: 5px solid #6366f1; } .card.c2 { border-top: 5px solid #3b82f6; }
+  .card.c3 { border-top: 5px solid #10b981; } .card.c4 { border-top: 5px solid #f59e0b; }
+  .card.c5 { border-top: 5px solid #14b8a6; } .card.c6 { border-top: 5px solid #ec4899; }
+
+  .mascot { position: absolute; left: 622px; top: 268px; font-size: 86px; transform: rotate(-10deg); filter: drop-shadow(0 10px 16px rgba(0,0,0,0.5)); }
+  .bubble { position: absolute; left: 598px; top: 200px; background: #fff; color: #1e293b; border-radius: 18px; padding: 8px 16px; font-size: 22px; font-weight: 700; box-shadow: 0 10px 24px rgba(0,0,0,0.35); white-space: nowrap; }
+  .bubble::after { content: ''; position: absolute; left: 28px; bottom: -12px; border: 10px solid transparent; border-top: 14px solid #fff; border-bottom: 0; }
+  .label {
+    position: absolute; right: 70px; top: 44px; background: rgba(16,185,129,0.2); border: 2px solid rgba(52,211,153,0.6);
+    color: #6ee7b7; border-radius: 999px; padding: 6px 18px; font-size: 22px; font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="shelf top" id="shelfTop"></div>
+  <div class="shelf bottom" id="shelfBottom"></div>
+
+  <div class="label">🔒 개인정보 저장 없음 · 무료</div>
+
+  <div class="wrap">
+    <div class="left">
+      <div class="pill">🎮 고전게임 6가지로 배우는 도서관 책 찾기</div>
+      <h1>숫자 암호를 풀고<br><span class="grad">책길 탐험대!</span></h1>
+      <div class="sub">도서관 <b>청구기호</b>와 책꽂이 순서를<br>놀면서 배워요 · 초등 고학년 ~ 중학생</div>
+      <div class="url">swulis00-crypto.github.io/library-game</div>
+    </div>
+    <div class="right">
+      <div class="games">
+        <div class="card c1"><span class="ic">🧭</span><span class="nm">미로 탈출</span></div>
+        <div class="card c2"><span class="ic">📚</span><span class="nm">책꽂이 정리</span></div>
+        <div class="card c3"><span class="ic">👾</span><span class="nm">외계인 격퇴</span></div>
+        <div class="card c4"><span class="ic">🧱</span><span class="nm">벽돌 깨기</span></div>
+        <div class="card c5"><span class="ic">🐍</span><span class="nm">책벌레 뱀</span></div>
+        <div class="card c6"><span class="ic">🔨</span><span class="nm">두더지 팡팡</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bubble">같이 찾자!</div>
+  <div class="mascot">🐛</div>
+
+<script>
+  const colors = ['#6366f1','#ec4899','#10b981','#f59e0b','#06b6d4','#8b5cf6','#f43f5e'];
+  for (const id of ['shelfTop','shelfBottom']) {
+    const el = document.getElementById(id);
+    for (let i = 0; i < 48; i++) {
+      const b = document.createElement('i');
+      b.style.background = colors[(i * 5 + (id === 'shelfTop' ? 2 : 0)) % colors.length];
+      b.style.height = (26 + ((i * 37) % 24)) + 'px';
+      el.appendChild(b);
+    }
+  }
+  const st = document.getElementById('stars');
+  let seed = 7;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('i');
+    s.style.left = (rnd() * 1200) + 'px';
+    s.style.top = (rnd() * 630) + 'px';
+    s.style.opacity = 0.25 + rnd() * 0.6;
+    const sz = 2 + rnd() * 4; s.style.width = s.style.height = sz + 'px';
+    st.appendChild(s);
+  }
+</script>
+</body>
+</html>

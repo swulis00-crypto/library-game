@@ -79,6 +79,18 @@ npm run build    # dist/ 생성
 
 ---
 
+## 🖼️ 오픈그래프 이미지
+
+링크 미리보기용 이미지는 [design/og-image.html](design/og-image.html)을 1200×630으로 렌더링한 `public/og-image.png`입니다.
+문구나 디자인을 바꾼 뒤에는 아래 명령으로 다시 만듭니다(설치된 Chrome 사용, Playwright 필요).
+
+```bash
+npm i -D playwright        # 처음 한 번
+node scripts/render-og.mjs
+```
+
+---
+
 ## 🗂️ 구조
 
 ```
