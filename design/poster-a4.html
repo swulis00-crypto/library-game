@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>책길 탐험대 A4 포스터</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet" />
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 794px; height: 1123px; overflow: hidden; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f8fafc;
+    background: #0f172a;
+    background-image:
+      radial-gradient(circle at 10% 8%, #312e81 0%, transparent 38%),
+      radial-gradient(circle at 92% 30%, rgba(236,72,153,0.35) 0%, transparent 32%),
+      radial-gradient(circle at 80% 95%, #4c1d95 0%, transparent 38%),
+      linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    position: relative;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .stars i { position: absolute; border-radius: 50%; background: #fde68a; }
+  .page { position: absolute; inset: 0; padding: 30px 32px 26px; display: flex; flex-direction: column; gap: 14px; }
+
+  /* 헤더 */
+  .head { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; }
+  .logo { width: 62px; height: 62px; border-radius: 18px; background: linear-gradient(135deg, #6366f1, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 10px 24px rgba(99,102,241,0.5); }
+  .title h1 { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 42px; line-height: 1; letter-spacing: -1px; white-space: nowrap; }
+  .title h1 .grad { background: linear-gradient(135deg, #fde68a 0%, #f472b6 55%, #60a5fa 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .title p { margin-top: 6px; font-size: 14.5px; font-weight: 700; color: #c7d2fe; }
+  .head-badge { text-align: right; }
+  .head-badge .b1 { display: inline-block; white-space: nowrap; background: rgba(16,185,129,0.18); border: 2px solid rgba(52,211,153,0.6); color: #6ee7b7; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 800; }
+  .head-badge .b2 { margin-top: 6px; font-size: 11px; white-space: nowrap; color: #94a3b8; font-weight: 700; }
+
+  /* 히어로 */
+  .hero { display: grid; grid-template-columns: 1fr 262px; gap: 16px; align-items: stretch; height: 326px; }
+  .arcade { display: flex; height: 100%; overflow: hidden; background: linear-gradient(180deg, #1e1b4b, #0f172a); border: 3px solid rgba(165,180,252,0.45); border-radius: 22px; padding: 8px; box-shadow: 0 0 0 5px rgba(15,23,42,0.9), 0 0 40px rgba(99,102,241,0.45); position: relative; }
+  .arcade img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 14px; }
+  .arcade .cap { position: absolute; left: 20px; top: 20px; background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 5px 14px 5px 10px; font-family: 'Jua', sans-serif; font-size: 16px; color: #fde68a; }
+  .arcade .cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; font-family: 'Jua', sans-serif; font-size: 22px; padding: 10px 28px; border-radius: 999px; box-shadow: 0 0 0 4px rgba(255,255,255,0.15), 0 0 30px rgba(99,102,241,0.9); white-space: nowrap; }
+  .side { display: flex; flex-direction: column; gap: 10px; }
+  .mascot-box { background: rgba(30,41,59,0.75); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; }
+  .mascot-box .m { font-size: 44px; transform: rotate(-10deg); filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5)); }
+  .mascot-box .t { font-size: 14px; font-weight: 700; line-height: 1.4; color: #e2e8f0; }
+  .mascot-box .t b { color: #fde68a; }
+  .learn { background: rgba(30,41,59,0.75); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 12px 14px; flex: 1; }
+  .learn h3 { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 19px; color: #c7d2fe; margin-bottom: 8px; }
+  .learn li { list-style: none; display: flex; gap: 8px; align-items: flex-start; font-size: 11.5px; line-height: 1.35; margin-bottom: 5px; color: #e2e8f0; }
+  .learn li .ic { font-size: 18px; line-height: 1.1; flex-shrink: 0; }
+  .learn li b { color: #fff; }
+
+  /* 게임 6종 */
+  .games h2 { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 24px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+  .games h2 small { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; color: #94a3b8; font-weight: 700; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .card { background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.12); border-top: 4px solid var(--c); border-radius: 14px; padding: 7px 8px 8px; }
+  .card img { display: block; width: 100%; height: 112px; object-fit: cover; object-position: center top; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); }
+  .card .n { margin-top: 5px; font-family: 'Jua', sans-serif; font-size: 15px; }
+  .card .d { font-size: 10.5px; color: #cbd5e1; line-height: 1.35; margin-top: 2px; }
+
+  /* 하단 */
+  .foot { display: grid; grid-template-columns: 142px 1fr; gap: 16px; align-items: center; background: linear-gradient(135deg, rgba(99,102,241,0.22), rgba(236,72,153,0.18)); border: 2px solid rgba(165,180,252,0.5); border-radius: 20px; padding: 12px 16px; }
+  .qr { background: #fff; border-radius: 14px; padding: 8px; width: 142px; height: 142px; }
+  .qr svg { width: 100%; height: 100%; display: block; }
+  .foot h3 { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 23px; line-height: 1.1; }
+  .foot h3 b { color: #fde68a; }
+  .foot .url { margin-top: 6px; font-size: 17px; font-weight: 900; color: #fff; letter-spacing: 0.2px; }
+  .chips { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 700; color: #e2e8f0; }
+  .foot .who { margin-top: 8px; font-size: 11.5px; color: #c7d2fe; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="page">
+    <!-- 헤더 -->
+    <div class="head">
+      <div class="logo">📚</div>
+      <div class="title">
+        <h1>숫자 암호를 풀고 <span class="grad">책길 탐험대!</span></h1>
+        <p>고전게임 6가지로 배우는 도서관 책 찾기 · 청구기호(KDC) 학습 웹 게임</p>
+      </div>
+      <div class="head-badge">
+        <div class="b1">🔒 개인정보 저장 없음 · 무료</div>
+        <div class="b2">초등 고학년 ~ 중학생 · 도서관 이용 교육</div>
+      </div>
+    </div>
+
+    <!-- 히어로 -->
+    <div class="hero">
+      <div class="arcade">
+        <img src="poster/shots/maze.png" alt="미로 탈출 게임 화면" />
+        <div class="cap">🧭 미로 탈출</div>
+        <div class="cta">▶ 게임 시작!</div>
+      </div>
+      <div class="side">
+        <div class="mascot-box">
+          <div class="m">🐛</div>
+          <div class="t">안녕! 나는 책벌레 <b>북이</b>야.<br>도서관 책에는 모두 <b>주소</b>가 있어. 그 주소를 읽으면 어떤 책도 금방 찾아!</div>
+        </div>
+        <div class="learn">
+          <h3>🎯 놀면서 이렇게 배워요</h3>
+          <ul>
+            <li><span class="ic">🔢</span><span><b>숫자 = 책의 주제</b><br>400은 과학, 800은 이야기책, 900은 역사!</span></li>
+            <li><span class="ic">📚</span><span><b>책꽂이 순서</b><br>작은 번호부터, 소수점은 한 자리씩, 같으면 가나다순</span></li>
+            <li><span class="ic">🏷️</span><span><b>저자기호 읽기</b><br>성 + 이름 번호 + 제목 첫소리 (만들 줄은 몰라도 OK!)</span></li>
+            <li><span class="ic">💡</span><span><b>틀려도 괜찮아</b><br>바로 힌트가 뜨고, 끝나면 배움 카드로 다시 봐요</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 게임 6종 -->
+    <div class="games">
+      <h2>🎮 고전게임 6가지 <small>매번 다른 문제 · 콤보 · 별 3개 모으기</small></h2>
+      <div class="grid">
+        <div class="card" style="--c:#6366f1"><img src="poster/shots/maze.png" alt="" /><div class="n">🧭 미로 탈출</div><div class="d">힌트에 맞는 번호 책을 찾아 출구로! 큰 별을 먹으면 유령도 잡아요</div></div>
+        <div class="card" style="--c:#3b82f6"><img src="poster/shots/shelfSort.png" alt="" /><div class="n">📚 책꽂이 정리</div><div class="d">뒤섞인 책을 끌어서 번호 순서대로. 칸마다 ✓✗로 바로 알려줘요</div></div>
+        <div class="card" style="--c:#10b981"><img src="poster/shots/spaceDefense.png" alt="" /><div class="n">👾 외계인 격퇴</div><div class="d">주제에 맞는 번호를 단 외계인만 레이저로 격추!</div></div>
+        <div class="card" style="--c:#f59e0b"><img src="poster/shots/brickBreaker.png" alt="" /><div class="n">🧱 벽돌 깨기</div><div class="d">미션 번호대(000~900) 벽돌만 공으로 깨뜨려요</div></div>
+        <div class="card" style="--c:#14b8a6"><img src="poster/shots/snake.png" alt="" /><div class="n">🐍 책벌레 뱀</div><div class="d">작은 번호부터 차례대로 먹으면 몸이 쑥쑥!</div></div>
+        <div class="card" style="--c:#ec4899"><img src="poster/shots/whackMole.png" alt="" /><div class="n">🔨 두더지 팡팡</div><div class="d">팻말을 읽고 정답 저자기호·분류번호 두더지를 콩!</div></div>
+      </div>
+    </div>
+
+    <!-- 하단: QR -->
+    <div class="foot">
+      <div class="qr" id="qr"></div>
+      <div>
+        <h3>📱 QR을 찍고 <b>지금 바로</b> 해보세요!</h3>
+        <div class="url">swulis00-crypto.github.io/library-game</div>
+        <div class="chips">
+          <span class="chip">✅ 설치 없음 · 링크로 바로 실행</span>
+          <span class="chip">📱 태블릿 · 휴대폰 · PC</span>
+          <span class="chip">🔒 이름·점수 저장 안 함</span>
+          <span class="chip">📖 사서가 우리 도서관 책 등록 가능</span>
+          <span class="chip">🎁 무료</span>
+        </div>
+        <div class="who">대상: 초등 고학년 ~ 중학생 · 활용: 도서관 이용 교육, 독서 행사, 방과후 · 한국십진분류법(KDC) 제6판 기준</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const st = document.getElementById('stars');
+  let seed = 11;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('i');
+    const sz = 1.5 + rnd() * 3;
+    s.style.cssText = `left:${rnd()*794}px;top:${rnd()*1123}px;width:${sz}px;height:${sz}px;opacity:${0.2+rnd()*0.55}`;
+    st.appendChild(s);
+  }
+</script>
+</body>
+</html>

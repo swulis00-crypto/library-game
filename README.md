@@ -111,3 +111,15 @@ src/
   audio/soundFx.js        Web Audio 8비트 효과음
 _backup_v1/               v1 소스 백업(삭제해도 무방)
 ```
+
+## 🖨️ A4 홍보 포스터 (박람회·부스용)
+
+- 인쇄용 PNG(300dpi): [public/poster/book-trail-poster-a4.png](public/poster/book-trail-poster-a4.png)
+- PDF(A4, 여백 없음): [public/poster/book-trail-poster-a4.pdf](public/poster/book-trail-poster-a4.pdf)
+- 배포 후 주소: https://swulis00-crypto.github.io/library-game/poster/book-trail-poster-a4.pdf
+- 원본은 [design/poster-a4.html](design/poster-a4.html). 문구를 고친 뒤 다시 만들려면:
+
+```bash
+npm i -D playwright qrcode                 # 처음 한 번
+node scripts/render-poster.mjs             # 게임 화면 캡처(design/poster/shots)가 있어야 함
+```
