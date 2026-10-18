@@ -138,9 +138,9 @@ class Store {
   _loadSettings() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_SETTINGS);
-      if (raw) return { sound: true, bgm: false, ...JSON.parse(raw) };
+      if (raw) return { sound: true, bgm: false, padSide: 'right', ...JSON.parse(raw) };
     } catch (e) { /* ignore */ }
-    return { sound: true, bgm: false };
+    return { sound: true, bgm: false, padSide: 'right' };
   }
 
   _save(key, value) {

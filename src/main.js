@@ -51,6 +51,8 @@ function initApp() {
   const avatarBadge = document.getElementById('avatarBadge');
   const brandLogo = document.getElementById('brandLogo');
 
+  applyPadSide();
+
   // 저장된 소리 설정 적용
   soundFx.setMuted(!store.settings.sound);
   const paintSound = () => {
@@ -109,6 +111,16 @@ function initApp() {
 
   updateHeader(store);
   renderCurrentScreen(store, mainContent);
+}
+
+/** 터치 패드 위치(왼쪽/오른쪽) 적용 — 기기 설정으로만 저장 */
+function applyPadSide() {
+  const right = (store.settings.padSide || 'right') === 'right';
+  document.body.classList.toggle('pad-right', right);
+  document.querySelectorAll('.pad-side-btn').forEach(b => {
+    b.textContent = right ? '◀ 패드 왼쪽으로' : '패드 오른쪽으로 ▶';
+    b.title = '방향 패드 위치 바꾸기';
+  });
 }
 
 function destroyCurrentGame() {
@@ -237,6 +249,7 @@ function renderGameArena(container, state) {
         <div class="touch-action-group ${showAction ? '' : 'hidden'}">
           <button class="touch-action-btn" id="touchActionBtn"><span>${actionLabel}</span></button>
         </div>
+        <button class="pad-side-btn" id="btnPadSide" type="button">↔</button>
       </div>
 
       <p class="game-howto">💡 ${meta.howTo}</p>
@@ -464,6 +477,17 @@ function renderGameArena(container, state) {
     if (activeGame.shoot) activeGame.shoot();
     else if (activeGame.checkSolution) activeGame.checkSolution();
   });
+
+  const padSideBtn = container.querySelector('#btnPadSide');
+  if (padSideBtn) {
+    padSideBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      soundFx.play('click');
+      store.setSetting('padSide', (store.settings.padSide || 'right') === 'right' ? 'left' : 'right');
+      applyPadSide();
+    });
+  }
+  applyPadSide();
 
   // 카운트다운 → 시작
   runCountdown(overlay, meta, () => {
