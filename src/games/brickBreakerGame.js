@@ -107,6 +107,7 @@ export class BrickBreakerGame extends BaseGame {
         className: d.className,
         isTarget: d.isTarget,
         hp: d.isTarget ? 1 : (isEasy ? 1 : 2),
+        maxHp: d.isTarget ? 1 : (isEasy ? 1 : 2),
         alive: true
       };
     });
@@ -300,7 +301,7 @@ export class BrickBreakerGame extends BaseGame {
 
     this.bricks.forEach(br => {
       if (!br.alive) return;
-      const cracked = !br.isTarget && br.hp === 1;
+      const cracked = br.hp < br.maxHp; // 맞아서 체력이 줄었을 때만 금이 감
       ctx.fillStyle = cracked ? '#3f4b61' : '#4b5a75';
       this.rrect(br.x, br.y, br.w, br.h, 6);
       ctx.fill();
