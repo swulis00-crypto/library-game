@@ -2490,3 +2490,28 @@ body {
 @media (min-width: 901px) and (max-width: 1400px) and (pointer: coarse) {
   .touch-controls-bar { align-self: stretch; height: 100%; }
 }
+
+/* V2.4 보정: 외계인 격퇴(이동+발사)는 항상 방향 왼쪽 아래 · 발사 오른쪽 아래로 고정 */
+@media (min-width: 901px) and (max-width: 1400px) and (pointer: coarse) {
+  .pad-right .game-screen[data-controls="horizontal-action"] {
+    grid-template-columns: 196px minmax(0, 1fr) 272px;
+    grid-template-areas:
+      "left  view clue"
+      "left  view toast"
+      "left  view action"
+      "howto howto howto";
+    grid-template-areas:
+      "hud   hud  hud"
+      "left  view clue"
+      "left  view toast"
+      "left  view action"
+      "howto howto howto";
+  }
+  .pad-right .game-screen[data-controls="horizontal-action"] .touch-controls-bar { grid-area: left; }
+  .pad-right .game-screen[data-controls="horizontal-action"] .touch-action-group { left: auto; right: 22px; }
+}
+@media (max-width: 1000px) {
+  .pad-right .game-screen[data-controls="horizontal-action"] .touch-controls-bar { flex-direction: row; }
+  .pad-right .game-screen[data-controls="horizontal-action"] .bar-clue { text-align: left; }
+}
+.game-screen[data-controls="horizontal-action"] .pad-side-btn { display: none; }
